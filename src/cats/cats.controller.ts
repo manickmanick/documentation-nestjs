@@ -7,11 +7,15 @@ import {
   Query,
   Param,
   Headers,
+  Post,
 } from '@nestjs/common';
 import { Request } from 'express';
+import { CatsService } from './cats.service';
 
 @Controller('cats')
 export class CatsController {
+  constructor(private catsService: CatsService) {}
+
   @Get()
   findAll(): string {
     return '<h1>This action returns all cats</h1>';
@@ -37,5 +41,15 @@ export class CatsController {
   ) {
     console.log(body, query, param, header);
     return 'success';
+  }
+
+  @Post()
+  async create(@Body() body) {
+    return this.catsService.create(body);
+  }
+
+  @Get('findAllCats')
+  async findAllCats() {
+    return this.catsService.findAll();
   }
 }
