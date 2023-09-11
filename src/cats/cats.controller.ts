@@ -9,6 +9,7 @@ import {
   Headers,
   Post,
   ParseIntPipe,
+  HttpStatus,
 } from '@nestjs/common';
 import { Request } from 'express';
 import { CatsService } from './cats.service';
@@ -55,7 +56,13 @@ export class CatsController {
   }
 
   @Get(':id')
-  async findOne(@Param('id', ParseIntPipe) id: number) {
+  async findOne(
+    @Param(
+      'id',
+      new ParseIntPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE }),
+    )
+    id: number,
+  ) {
     return this.catsService.findOne(id);
   }
 }
