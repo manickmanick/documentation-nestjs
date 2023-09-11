@@ -19,7 +19,7 @@ import { logger } from './middleware/logger.middleware2';
 export class AppModule implements NestModule {
   async configure(consumer: MiddlewareConsumer) {
     await consumer
-      .apply(LoggerMiddleware, logger)
+      .apply(LoggerMiddleware)
       .forRoutes({ path: 'cats/*', method: RequestMethod.GET });
   }
 }
