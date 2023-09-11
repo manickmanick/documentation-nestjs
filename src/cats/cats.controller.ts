@@ -55,14 +55,20 @@ export class CatsController {
     return this.catsService.findAll();
   }
 
-  @Get(':id')
-  async findOne(
-    @Param(
-      'id',
-      new ParseIntPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE }),
-    )
-    id: number,
-  ) {
-    return this.catsService.findOne(id);
+  // @Get(':id')
+  // async findOne(
+  //   @Param(
+  //     'id',
+  //     new ParseIntPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE }),
+  //   )
+  //   id: number,
+  // ) {
+  //   return this.catsService.findOne(id);
+  // }
+
+  @Get('query')
+  async findOneQuery(@Query('id', ParseIntPipe) id: number) {
+    // return this.catsService.findOne(id);
+    return id;
   }
 }
