@@ -10,6 +10,15 @@ export class CatsService {
 
   findAll() {
     // return this.cats;
-    throw new HttpException('Forbidden', HttpStatus.FORBIDDEN);
+    throw new HttpException(
+      {
+        status: HttpStatus.FORBIDDEN,
+        error: 'This is a custom message',
+      },
+      HttpStatus.FORBIDDEN,
+      {
+        cause: 'this is sample error msg',
+      },
+    );
   }
 }
