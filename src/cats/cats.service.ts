@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { Cat } from './interface/cat.interface';
 
 @Injectable()
@@ -8,7 +8,8 @@ export class CatsService {
     return this.cats.push(cat);
   }
 
-  findAll(): Cat[] {
-    return this.cats;
+  findAll() {
+    // return this.cats;
+    throw new HttpException('Forbidden', HttpStatus.FORBIDDEN);
   }
 }
