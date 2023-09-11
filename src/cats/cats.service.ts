@@ -23,4 +23,8 @@ export class CatsService {
     //   },
     // );
   }
+
+  findOne(id) {
+    return id;
+  }
 }

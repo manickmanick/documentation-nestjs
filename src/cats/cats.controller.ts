@@ -8,6 +8,7 @@ import {
   Param,
   Headers,
   Post,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { Request } from 'express';
 import { CatsService } from './cats.service';
@@ -16,10 +17,10 @@ import { CatsService } from './cats.service';
 export class CatsController {
   constructor(private catsService: CatsService) {}
 
-  @Get()
-  findAll(): string {
-    return '<h1>This action returns all cats</h1>';
-  }
+  // @Get()
+  // findAll(): string {
+  //   return '<h1>This action returns all cats</h1>';
+  // }
 
   @Get('expressGet/:id')
   findAllByExpress(@Req() request: Request): string {
@@ -51,5 +52,10 @@ export class CatsController {
   @Get('findAllCats')
   async findAllCats() {
     return this.catsService.findAll();
+  }
+
+  @Get(':id')
+  async findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.catsService.findOne(id);
   }
 }
