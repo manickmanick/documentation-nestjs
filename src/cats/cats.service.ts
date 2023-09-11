@@ -1,5 +1,6 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { Cat } from './interface/cat.interface';
+import { ForbiddenException } from '././../../ownException/forbidden.exception';
 
 @Injectable()
 export class CatsService {
@@ -9,16 +10,17 @@ export class CatsService {
   }
 
   findAll() {
+    throw new ForbiddenException();
     // return this.cats;
-    throw new HttpException(
-      {
-        status: HttpStatus.FORBIDDEN,
-        error: 'This is a custom message',
-      },
-      HttpStatus.FORBIDDEN,
-      {
-        cause: 'this is sample error msg',
-      },
-    );
+    // throw new HttpException(
+    //   {
+    //     status: HttpStatus.FORBIDDEN,
+    //     error: 'This is a custom message',
+    //   },
+    //   HttpStatus.FORBIDDEN,
+    //   {
+    //     cause: 'this is sample error msg',
+    //   },
+    // );
   }
 }
